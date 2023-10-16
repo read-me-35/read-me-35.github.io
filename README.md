@@ -22,7 +22,8 @@ npm run dev
 
 ## Group information
 
-Group:
+Group:FA3.5
+
 Name: Sacha Arseneault
 Student #: 300152630
 
