@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "opencv-react": "^0.0.6",
+    "@techstark/opencv-js": "^4.8.0-release.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-webcam": "^7.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
