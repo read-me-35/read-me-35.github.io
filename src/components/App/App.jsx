@@ -1,16 +1,36 @@
 import { useState } from "react";
 import "./App.css";
+import Home from "../Home/Home.jsx";
+import Selection from "../Selection/Selection.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [pageIndex, setPageIndex] = useState(0);
+  const pages = [<Home/>, <Selection/>]
+
+
+  const nextPage = () =>{
+    if (pageIndex != pages.length-1)
+      setPageIndex(pageIndex => (pageIndex + 1));
+  }
+
+  const previousPage = () =>{
+    if (pageIndex != 0)
+      setPageIndex(pageIndex => (pageIndex - 1));
+  }
+
+
   return (
-    <div className="flex justify-center">
-      <div className=" w-1/2 border border-red-500 text-center">
-        <h1 className="text-3xl font-bold text-blue-950">Hero Section</h1>
-        <p>Count: {count}</p>
-        <button onClick={() => setCount(count + 1)}>Increment</button>
+    <>
+      <div className="h-full w-full flex">
+        <div className="border border-red h-48 w-48">
+          <button className="border border-black text-black" onClick={previousPage}>Previous Page</button>
+          <button className="border border-black text-black" onClick={nextPage}>Next Page</button>
+        </div>
+        <div className="content">
+          {pages[pageIndex]}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
