@@ -2,10 +2,12 @@ import { useState } from "react";
 import "./App.css";
 import Home from "../Home/Home.jsx";
 import Selection from "../Selection/Selection.jsx";
+import Settings from "../Settings/Settings.jsx";
+import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 
 function App() {
   const [pageIndex, setPageIndex] = useState(0);
-  const pages = [<Home/>, <Selection/>]
+  const pages = [<Home/>, <Selection/>, <Settings/>,<ReadyPage/>]
 
 
   const nextPage = () =>{
