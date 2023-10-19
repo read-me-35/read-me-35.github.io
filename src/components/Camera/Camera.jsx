@@ -48,11 +48,11 @@ function Camera() {
           id="img_src"
           src={imgSrc}
           alt="taken_image"
-          width="600"
-          height="600"
+          width="300"
+          height="900"
         />
       ) : (
-        <Webcam height={600} width={600} ref={webcamRef} />
+        <Webcam height={900} width={900} ref={webcamRef} />
       )}
       <div className="btn-container">
         {imgSrc ? (
@@ -67,6 +67,23 @@ function Camera() {
       </div>
       <h1 className="text-white">{resultText}</h1>
       <h2 className="text-white">{resultAccuracy}</h2>
+      <img
+        id="c_mask"
+        src="src/assets/c_mask.png"
+        alt="c mask"
+        width="116"
+        height="27"
+        className="hidden"
+      />
+      <img
+        id="t_mask"
+        src="src/assets/t_mask.png"
+        alt="t mask"
+        width="114"
+        height="37"
+        className="hidden"
+      />
+      {/* 
       <img
         id="pos_sample"
         src="src/assets/mask_positive.png"
@@ -98,10 +115,10 @@ function Camera() {
         width="250"
         height="300"
         className="hidden"
-      />
+      />*/}
       <img
         id="dummy_img"
-        src="src/assets/positive_test.png"
+        src="src/assets/negative_test.png"
         alt="dummy img"
         width="300"
         height="900"
