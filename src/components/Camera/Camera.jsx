@@ -56,13 +56,17 @@ function Camera() {
       )}
       <div className="btn-container">
         {imgSrc ? (
-          <button onClick={retake}>Retake photo</button>
+          <button className="btn bg-white text-black" onClick={retake}>
+            Retake photo
+          </button>
         ) : (
-          <button onClick={capture}>Capture photo</button>
+          <button className="btn bg-white text-black" onClick={capture}>
+            Capture photo
+          </button>
         )}
       </div>
-      <h1>{resultText}</h1>
-      <h2>{resultAccuracy}</h2>
+      <h1 className="text-white">{resultText}</h1>
+      <h2 className="text-white">{resultAccuracy}</h2>
       <img
         id="pos_sample"
         src="src/assets/mask_positive.png"
