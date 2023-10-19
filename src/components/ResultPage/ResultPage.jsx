@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ResultPage({ results }) {
+function ResultPage({ results },props) {
     const [messageIndex, setMessageIndex] = useState(0);
     const sentences = [
       "You Tested Covid Positive\nThe test reads two solid lines ",
@@ -24,7 +24,7 @@ function ResultPage({ results }) {
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
       <div className="flex-1 flex flex-col justify-center items-center space-y-4">
-        <button className="bg-yellow-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2" onClick={''}>
+        <button className="bg-yellow-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2" onClick={pageIndex==1}>
           <span>Home</span>
           <img
             src="path-to-your-image.png" // Replace with the actual path to your image
@@ -41,7 +41,7 @@ function ResultPage({ results }) {
         <button className="bg-blue-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2" onClick={handleNextClick}>
           <span>{ButtonText[ButtonTextIndex]}</span>
           <img
-            src="path-to-your-image.png" // Replace with the actual path to your image
+            src="/assets/images/covidimage.png"
             alt="Icon"
             className="w-6 h-6"
           />

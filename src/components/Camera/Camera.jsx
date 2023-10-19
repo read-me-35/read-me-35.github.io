@@ -56,16 +56,20 @@ function Camera() {
       )}
       <div className="btn-container">
         {imgSrc ? (
-          <button onClick={retake}>Retake photo</button>
+          <button className="btn bg-white text-black" onClick={retake}>
+            Retake photo
+          </button>
         ) : (
-          <button onClick={capture}>Capture photo</button>
+          <button className="btn bg-white text-black" onClick={capture}>
+            Capture photo
+          </button>
         )}
       </div>
-      <h1>{resultText}</h1>
-      <h2>{resultAccuracy}</h2>
+      <h1 className="text-white">{resultText}</h1>
+      <h2 className="text-white">{resultAccuracy}</h2>
       <img
         id="pos_sample"
-        src="src/assets/sample_pos.png"
+        src={sample_pos}
         alt="pos sample"
         width="250"
         height="300"
@@ -73,7 +77,7 @@ function Camera() {
       />
       <img
         id="neg_sample"
-        src="src/assets/sample_neg.png"
+        src={sample_neg}
         alt="neg sample"
         width="250"
         height="300"
@@ -81,7 +85,7 @@ function Camera() {
       />
       <img
         id="inv_sample"
-        src="src/assets/sample_inv.png"
+        src={sample_inv}
         alt="inv sample"
         width="250"
         height="300"
