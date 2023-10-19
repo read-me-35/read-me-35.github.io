@@ -5,18 +5,23 @@
 import cv from "@techstark/opencv-js";
 
 export const calculateResult = () => {
-  const samplePos = cv.imread(document.getElementById("pos_sample"));
-  const sampleNeg = cv.imread(document.getElementById("neg_sample"));
-  const sampleInv = cv.imread(document.getElementById("inv_sample"));
-  const src = cv.imread(document.getElementById("dummy_img"));
+  const maskPos = cv.imread(document.getElementById("mask_positive"));
+  const maskNeg = cv.imread(document.getElementById("mask_negative"));
+  const maskInv = cv.imread(document.getElementById("mask_invalid"));
+  const maskNull = cv.imread(document.getElementById("mask_null"));
+  const src = cv.imread(document.getElementById("img_src"));
+  cv.threshold(src, src, 0, 255, cv.THRESH_TOZERO);
 
-  const pos_accuracy = checkAccuracy(src, samplePos);
-  const neg_accuracy = checkAccuracy(src, sampleNeg);
-  const inv_accuracy = checkAccuracy(src, sampleInv);
+  const pos_accuracy = checkAccuracy(src, maskPos);
+  const neg_accuracy = checkAccuracy(src, maskNeg);
+  const inv_accuracy = checkAccuracy(src, maskInv);
+  const null_accuracy = checkAccuracy(src, maskNull);
+
   const result = {
     0: pos_accuracy.maxVal,
     1: neg_accuracy.maxVal,
     2: inv_accuracy.maxVal,
+    3: null_accuracy.maxVal,
   };
   for (let key in result) {
     result[key] = (result[key] * 100).toFixed(2);
@@ -36,7 +41,7 @@ export const calculateResult = () => {
 
   //if maxkey is under 50% then return 3
   if (max < 40) {
-    maxKey = 3;
+    maxKey = 4;
   }
   return [maxKey, max[0] + max[1] + "." + max[2] + max[3] + "%"];
 };

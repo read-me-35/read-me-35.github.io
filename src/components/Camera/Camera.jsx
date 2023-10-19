@@ -65,7 +65,7 @@ function Camera() {
       <h2>{resultAccuracy}</h2>
       <img
         id="pos_sample"
-        src="src/assets/sample_pos.png"
+        src="src/assets/mask_positive.png"
         alt="pos sample"
         width="250"
         height="300"
@@ -73,7 +73,7 @@ function Camera() {
       />
       <img
         id="neg_sample"
-        src="src/assets/sample_neg.png"
+        src="src/assets/mask_negative.png"
         alt="neg sample"
         width="250"
         height="300"
@@ -81,7 +81,15 @@ function Camera() {
       />
       <img
         id="inv_sample"
-        src="src/assets/sample_inv.png"
+        src="src/assets/mask_invalid.png"
+        alt="inv sample"
+        width="250"
+        height="300"
+        className="hidden"
+      />
+      <img
+        id="inv_sample"
+        src="src/assets/mask_null.png"
         alt="inv sample"
         width="250"
         height="300"
