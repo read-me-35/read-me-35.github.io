@@ -5,10 +5,10 @@
 import cv from "@techstark/opencv-js";
 
 export const calculateResult = () => {
-  const maskPos = cv.imread(document.getElementById("mask_positive"));
-  const maskNeg = cv.imread(document.getElementById("mask_negative"));
-  const maskInv = cv.imread(document.getElementById("mask_invalid"));
-  const maskNull = cv.imread(document.getElementById("mask_null"));
+  const maskPos = cv.imread(document.getElementById("pos_sample"));
+  const maskNeg = cv.imread(document.getElementById("neg_sample"));
+  const maskInv = cv.imread(document.getElementById("inv_sample"));
+  const maskNull = cv.imread(document.getElementById("null_sample"));
   const src = cv.imread(document.getElementById("img_src"));
   cv.threshold(src, src, 0, 255, cv.THRESH_TOZERO);
 

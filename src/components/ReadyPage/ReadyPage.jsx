@@ -1,11 +1,14 @@
 import covid from "../../assets/images/covidimage.png";
-import React from 'react';
+import React from "react";
 
 function ReadyPage(props) {
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
       <div className="flex-1 flex flex-col justify-center items-center space-y-4">
-        <button className="bg-red-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2" onClick={props.toPrevPage}>
+        <button
+          className="bg-red-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2"
+          onClick={props.toPrevPage}
+        >
           <span className="text-center">Back</span>
         </button>
         <div className="bg-gray-700 w-48 h-48 rounded-lg flex flex-col justify-center items-center">
@@ -18,7 +21,10 @@ function ReadyPage(props) {
             Prepare your camera and click "Next" when ready to scan.
           </p>
         </div>
-        <button className="bg-green-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2" onClick={props.toNextPage}>
+        <button
+          className="bg-green-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2"
+          onClick={props.toNextPage}
+        >
           <span className="text-center">Next</span>
         </button>
       </div>

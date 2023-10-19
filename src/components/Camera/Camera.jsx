@@ -92,7 +92,7 @@ function Camera() {
         className="hidden"
       />
       <img
-        id="inv_sample"
+        id="null_sample"
         src="src/assets/mask_null.png"
         alt="inv sample"
         width="250"
