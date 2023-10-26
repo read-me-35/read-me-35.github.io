@@ -6,6 +6,7 @@ import Settings from "../Settings/Settings.jsx";
 import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 import Camera from "../Camera/Camera.jsx";
 import ResultPage from "../ResultPage/ResultPage.jsx";
+import { useEffect } from 'react';
 
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -43,6 +44,11 @@ function App() {
     <ResultPage key="resultPage" toPrevPage={previousPage} toNextPage={nextPage} />,
   ];
 
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
+ 
   return (
     <div className={`${isLightMode ? 'bg-white' : 'bg-gray-900'}`}>
       {pages[pageIndex]}

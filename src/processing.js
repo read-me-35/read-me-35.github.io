@@ -1,3 +1,10 @@
+
+//just checking if browser supports text to speech (didnt feel like creating a new file for this, and I only need to run it once)
+if (!('speechSynthesis' in window)) {
+  alert("Your browser doesn't support text to speech.\nPlease try another browser.")
+}
+
+
 /* eslint-disable no-unused-vars */
 //import samplePos from "./assets/sample_pos.png";
 //import sampleNeg from "./assets/sample_neg.png";
