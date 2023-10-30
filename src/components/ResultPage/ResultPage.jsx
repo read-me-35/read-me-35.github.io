@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useEffect} from 'react';
 
 function ResultPage({ results },props) {
     const [messageIndex, setMessageIndex] = useState(0);
@@ -19,6 +20,11 @@ function ResultPage({ results },props) {
     "Info",
     "Try Again",
   ];
+
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
 
 
   return (

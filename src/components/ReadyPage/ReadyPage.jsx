@@ -2,6 +2,10 @@ import covid from "../../assets/images/covidimage.png";
 import React from 'react';
 
 function ReadyPage(props) {
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
       <div className="flex-1 flex flex-col justify-center items-center space-y-4">

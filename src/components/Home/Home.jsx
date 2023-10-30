@@ -1,6 +1,11 @@
 import setting from "../../assets/images/settingsimage.png";
 import scan from "../../assets/images/scanimage.png";
+import {useEffect} from 'react';
 function Home(props) {
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
   return (
     <div className="bg-transparent text-white min-h-screen flex flex-col justify-center items-center">
       <div className="flex-1 flex flex-col justify-center items-center">

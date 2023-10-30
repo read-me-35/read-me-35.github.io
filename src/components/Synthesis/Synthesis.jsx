@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 
-const Synthesis = () => {
+
+function Synthesis(msg = document.body.innerText) {
+
   useEffect(() => { //this code will run after the render
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    let utterance = new SpeechSynthesisUtterance(msg);
     window.speechSynthesis.speak(utterance);
   }, []);
 
