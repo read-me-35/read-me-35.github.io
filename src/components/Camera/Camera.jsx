@@ -3,9 +3,21 @@ import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 
-function Camera() {
-  // the link to your model provided by Teachable Machine export panel
-  const URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+function Camera(props) {
+  let URL;
+  switch (props.testType) {
+    case "covid":
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      break;
+    case "pregnancy":
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      break;
+    case "ph":
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      break;
+    default:
+      "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+  }
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
 
@@ -76,6 +88,12 @@ function Camera() {
 
   return (
     <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col">
+      <button
+        className="bg-red-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center"
+        onClick={props.toPrevPage}
+      >
+        <span className="text-center text-base sm:text-lg">Back</span>
+      </button>
       <div className="image-container border-slate-700 border-4 rounded-lg">
         {imgSrc ? (
           <img
@@ -92,7 +110,7 @@ function Camera() {
       <div className="">
         {imgSrc ? (
           <button
-            className="btn text-black border-transparent rounded-md bg-yellow-400  px-4 py-2"
+            className="btn text-black border-transparent rounded-md bg-yellow-400 px-4 py-2"
             onClick={tryAgain}
           >
             Retake photo
@@ -118,7 +136,7 @@ function Camera() {
       {imgSrc ? (
         <div
           id="results-list"
-          className="border-2 border-grey-700 rounded-lg p-6 mt-4"
+          className="bg-slate-500 border-2 border-grey-700 rounded-lg p-6 mt-4"
         ></div>
       ) : (
         <></>
