@@ -10,13 +10,13 @@ function Camera(props) {
       URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
       break;
     case "pregnancy":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // make pregnancy tensor model
       break;
     case "ph":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // make pH tensor model
       break;
     default:
-      "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default model
   }
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
