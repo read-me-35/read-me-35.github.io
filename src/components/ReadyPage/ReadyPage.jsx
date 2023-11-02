@@ -1,5 +1,6 @@
 import covid from "../../assets/images/covidimage.png";
 import React from "react";
+import init from "../Camera/Camera.jsx";
 
 function ReadyPage(props) {
   return (

@@ -57,7 +57,6 @@ function App() {
       {pages[pageIndex]}
     </div>
   );
-  ``;
 }
 
 export default App;
