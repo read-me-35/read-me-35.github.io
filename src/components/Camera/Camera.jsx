@@ -1,18 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
-//import { calculateResult } from "../../processing.js";
-import sample_pos from "../../assets/sample_pos.png";
-import sample_neg from "../../assets/sample_neg.png";
-import sample_inv from "../../assets/sample_inv.png";
-
 import * as tf from "@tensorflow/tfjs";
-import React from "react";
-import {
-  getModel,
-  convertBase64ToTensor,
-  startPrediction,
-} from "../../helpers/tensor-helper";
 
 function Camera() {
   // the link to your model provided by Teachable Machine export panel
@@ -86,7 +75,7 @@ function Camera() {
   }
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center flex gap-4 flex-col">
+    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col">
       <div className="image-container border-slate-700 border-4 rounded-lg">
         {imgSrc ? (
           <img
