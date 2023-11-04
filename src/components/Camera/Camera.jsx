@@ -7,7 +7,7 @@ function Camera(props) {
   let URL;
   switch (props.testType) {
     case "covid":
-      URL = "https://teachablemachine.withgoogle.com/models/69d_yg9eF/"; // trained covid test model (ready)
+      URL = "https://teachablemachine.withgoogle.com/models/s9rU1K5RQ/"; // trained covid test model (ready)
       break;
     case "pregnancy":
       URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
