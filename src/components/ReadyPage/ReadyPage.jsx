@@ -40,7 +40,7 @@ function ReadyPage(props) {
             className="w-28 h-28 my-4" // Adjust the width and height
           />
           <p className="text-gray-300 text-center mt-2">
-            Prepare your camera and click "Next" when ready to scan.
+            {`Prepare your camera and click "Next" when ready to scan.`}
           </p>
         </div>
         <button

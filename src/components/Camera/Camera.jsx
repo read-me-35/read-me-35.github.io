@@ -7,16 +7,16 @@ function Camera(props) {
   let URL;
   switch (props.testType) {
     case "covid":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+      URL = "https://teachablemachine.withgoogle.com/models/69d_yg9eF/"; // trained covid test model (ready)
       break;
     case "pregnancy":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // make pregnancy tensor model
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
       break;
     case "ph":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // make pH tensor model
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
       break;
     default:
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default model
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
   }
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
@@ -24,7 +24,7 @@ function Camera(props) {
   let labelContainer;
   let [model, setModel] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
-  const flip = true;
+  const flip = false;
   const [webcam, setWebCam] = useState(new tmImage.Webcam(300, 300, flip));
   //const [isCamOn, setCamOn] = useState(false);
 
@@ -107,6 +107,14 @@ function Camera(props) {
           <div id="webcam-container"></div>
         )}
       </div>
+      {imgSrc ? (
+        <></>
+      ) : (
+        <div className="text-sm italic text-white bg-slate-700 rounded-md border-transparent mt-4 px-4 py-2">
+          Please ensure the test is in frame and properly lit.
+        </div>
+      )}
+
       <div className="">
         {imgSrc ? (
           <button
