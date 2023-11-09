@@ -2,6 +2,7 @@
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
+import "./Camera.css";
 
 function Camera(props) {
   let URL;
@@ -104,7 +105,11 @@ function Camera(props) {
             height="300"
           />
         ) : (
-          <div id="webcam-container"></div>
+          <div className="webcam">
+            <div id="webcam-container" className="flex justify-center">
+              <div className="frame"></div>
+            </div>
+          </div>
         )}
       </div>
       {imgSrc ? (
