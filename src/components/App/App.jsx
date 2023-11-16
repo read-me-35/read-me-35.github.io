@@ -13,11 +13,12 @@ function App() {
   const [isLightMode, setLightMode] = useState(false);
 
   const toggleMode = () => {
-      setLightMode(!isLightMode);
+    setLightMode(!isLightMode);
   };
-  
+
   const nextPage = () => {
-    if (pageIndex !== pages.length - 1) setPageIndex((pageIndex) => pageIndex + 1);
+    if (pageIndex !== pages.length - 1)
+      setPageIndex((pageIndex) => pageIndex + 1);
   };
 
   const previousPage = () => {
@@ -39,9 +40,17 @@ function App() {
       toNextPage={nextPage}
       isLightMode={isLightMode} // Pass isLightMode as a prop to Selection
     />,
-    <ReadyPage key="readyPage" toPrevPage={previousPage} toNextPage={nextPage} />,
+    <ReadyPage
+      key="readyPage"
+      toPrevPage={previousPage}
+      toNextPage={nextPage}
+    />,
     <Camera key="camera" toPrevPage={previousPage} toNextPage={nextPage} />,
-    <ResultPage key="resultPage" toPrevPage={previousPage} toNextPage={nextPage} />,
+    <ResultPage
+      key="resultPage"
+      toPrevPage={previousPage}
+      toNextPage={nextPage}
+    />,
   ];
 
   useEffect(() => { //this code will run after the render
@@ -50,10 +59,10 @@ function App() {
   }, []);
  
   return (
-    <div className={`${isLightMode ? 'bg-white' : 'bg-gray-900'}`}>
+    <div className={`${isLightMode ? "bg-white" : "bg-gray-900"}`}>
       {pages[pageIndex]}
-      </div>  
-  );``
+    </div>
+  );
 }
 
 export default App;
