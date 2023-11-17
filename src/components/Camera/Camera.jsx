@@ -74,6 +74,11 @@ function Camera() {
     }
   }
 
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
   return (
     <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col">
       <div className="image-container border-slate-700 border-4 rounded-lg">
