@@ -6,10 +6,12 @@ import Settings from "../Settings/Settings.jsx";
 import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 import Camera from "../Camera/Camera.jsx";
 import ResultPage from "../ResultPage/ResultPage.jsx";
+import { useEffect } from 'react';
 
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
+  const [currentTestType, setCurrentTestType] = useState(""); // ["covid", "pregnancy", "ph"
 
   const toggleMode = () => {
     setLightMode(!isLightMode);
@@ -24,31 +26,55 @@ function App() {
     if (pageIndex !== 0) setPageIndex((pageIndex) => pageIndex - 1);
   };
 
+  const onClickCovid = () => {
+    setCurrentTestType("covid");
+  };
+
+  const onClickPregnancy = () => {
+    setCurrentTestType("pregnancy");
+  };
+
+  const onClickPH = () => {
+    setCurrentTestType("ph");
+  };
+
   const pages = [
     <Settings
       key="settings"
       toPrevPage={previousPage}
       toNextPage={nextPage}
       toggleDisplayMode={toggleMode}
-      isLightMode={isLightMode} // Pass isLightMode as a prop to Settings
+      isLightMode={isLightMode}
     />,
     <Home key="home" toPrevPage={previousPage} toNextPage={nextPage} />,
     <Selection
       key="selection"
       toPrevPage={previousPage}
       toNextPage={nextPage}
-      isLightMode={isLightMode} // Pass isLightMode as a prop to Selection
+      onClickCovid={onClickCovid}
+      onClickPregnancy={onClickPregnancy}
+      onClickPH={onClickPH}
+      isLightMode={isLightMode}
     />,
     <ReadyPage
       key="readyPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      testType={currentTestType}
     />,
-    <Camera key="camera" toPrevPage={previousPage} toNextPage={nextPage} />,
+    <Camera
+      key="camera"
+      toPrevPage={previousPage}
+      toNextPage={nextPage}
+      testType={currentTestType}
+      isLightMode={isLightMode}
+    />,
     <ResultPage
       key="resultPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      testType={currentTestType}
+      isLightMode={isLightMode}
     />,
   ];
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function ResultPage({ results }, props) {
   const [messageIndex, setMessageIndex] = useState(0);
@@ -17,7 +17,21 @@ function ResultPage({ results }, props) {
   };
 
   const [ButtonTextIndex, setButtonIndex] = useState(0);
-  const ButtonText = ["Info", "Try Again"];
+  const ButtonText = [
+    "Info",
+    "Try Again",
+  ];
+
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
+
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
 
   return (
     <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center" alt="container">

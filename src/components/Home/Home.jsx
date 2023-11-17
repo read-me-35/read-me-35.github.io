@@ -1,6 +1,7 @@
 import setting from "../../assets/images/settingsimage.png";
 import scan from "../../assets/images/scanimage.png";
 import { useEffect } from 'react';
+
 function Home(props) {
   useEffect(() => { //this code will run after the render, for tts
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
