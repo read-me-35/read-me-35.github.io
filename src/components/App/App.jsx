@@ -6,7 +6,6 @@ import Settings from "../Settings/Settings.jsx";
 import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 import Camera from "../Camera/Camera.jsx";
 import ResultPage from "../ResultPage/ResultPage.jsx";
-import { useEffect } from 'react';
 
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -68,6 +67,7 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
+      setPageIndex={setPageIndex} // Pass the setPageIndex function to the Camera component
     />,
     <ResultPage
       key="resultPage"
