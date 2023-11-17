@@ -1,8 +1,13 @@
 import covid from "../../assets/images/covidimage.png";
 import ph from "../../assets/images/phimage.png";
 import preg from "../../assets/images/pregnancyimage.webp";
+import { useEffect } from 'react';
 
 function Selection(props) {
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
   return (
     <div className="bg-transparent text-white h-screen flex flex-col justify-center items-center" alt="container">
       <div className="flex-1 flex flex-col justify-center items-center space-y-4 wrap" alt="container">

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Webcam from "react-webcam";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 
 function Camera() {
@@ -73,6 +73,11 @@ function Camera() {
       document.getElementById("results-list").appendChild(entry);
     }
   }
+
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col" alt="container">

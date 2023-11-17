@@ -1,8 +1,13 @@
 import dark from "../../assets/images/moonimage.png";
 import light from "../../assets/images/lightimage.png";
+import { useEffect } from 'react';
+
 function Selection(props) {
   const { isLightMode, toggleMode } = props;
-
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
   return (
     <div
       className={` text-white h-screen flex flex-col justify-center items-center bg-transparent`}
