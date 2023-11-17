@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Webcam from "react-webcam";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 
 function Camera() {
@@ -74,14 +74,14 @@ function Camera() {
     }
   }
 
-  useEffect(() => { //this code will run after the render
+  useEffect(() => { //this code will run after the render, for tts
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, []);
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col">
-      <div className="image-container border-slate-700 border-4 rounded-lg">
+    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col" alt="container">
+      <div className="image-container border-slate-700 border-4 rounded-lg" alt="container">
         {imgSrc ? (
           <img
             id="img_src"
@@ -91,13 +91,14 @@ function Camera() {
             height="300"
           />
         ) : (
-          <div id="webcam-container"></div>
+          <div id="webcam-container" alt="webcam container"></div>
         )}
       </div>
-      <div className="">
+      <div className="" alt="buttons container">
         {imgSrc ? (
           <button
             className="btn text-black border-transparent rounded-md bg-yellow-400  px-4 py-2"
+            alt="retake photo button"
             onClick={tryAgain}
           >
             Retake photo
@@ -106,6 +107,7 @@ function Camera() {
           <div className="flex gap-2 flex-col">
             <button
               className={`btn text-black border-transparent rounded-md bg-blue-400  px-4 py-2 `}
+              alt="open webcam button"
               onClick={init}
             >
               Open Webcam
@@ -123,6 +125,7 @@ function Camera() {
       {imgSrc ? (
         <div
           id="results-list"
+          alt="results list"
           className="border-2 border-grey-700 rounded-lg p-6 mt-4"
         ></div>
       ) : (
