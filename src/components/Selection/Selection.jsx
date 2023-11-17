@@ -19,16 +19,28 @@ function Selection(props) {
         </button>
         <button
           className="bg-yellow-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
-          onClick={props.toNextPage}
+          onClick={() => {
+            props.onClickCovid(), props.toNextPage();
+          }}
         >
           <span className="text-center text-base sm:text-lg">Covid</span>
           <img src={covid} alt="Select Covid Testing" className="w-6 h-6" />
         </button>
-        <button className="bg-pink-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2">
+        <button
+          className="bg-pink-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
+          onClick={() => {
+            props.onClickPregnancy(), props.toNextPage();
+          }}
+        >
           <span className="text-center text-base sm:text-lg">Pregnancy</span>
           <img src={preg} alt="Select Pregnancy Testing" className="w-6 h-6" />
         </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
+          onClick={() => {
+            props.onClickPH(), props.toNextPage();
+          }}
+        >
           <span className="text-center text-base sm:text-lg">PH Level</span>
           <img src={ph} alt="Select PH Level Testing" className="w-6 h-6" />
         </button>

@@ -2,17 +2,31 @@
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
+import "./Camera.css";
 
-function Camera() {
-  // the link to your model provided by Teachable Machine export panel
-  const URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/";
+function Camera(props) {
+  let URL;
+  switch (props.testType) {
+    case "covid":
+      URL = "https://teachablemachine.withgoogle.com/models/EprntJt-u/"; // Model V2 (prototype 3)
+      //URL = "https://teachablemachine.withgoogle.com/models/s9rU1K5RQ/"; // Model V1 (prototype 2)
+      break;
+    case "pregnancy":
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
+      break;
+    case "ph":
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
+      break;
+    default:
+      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
+  }
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
 
   let labelContainer;
   let [model, setModel] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
-  const flip = true;
+  const flip = false;
   const [webcam, setWebCam] = useState(new tmImage.Webcam(300, 300, flip));
   //const [isCamOn, setCamOn] = useState(false);
 
