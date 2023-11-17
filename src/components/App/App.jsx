@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Home from "../Home/Home.jsx";
 import Selection from "../Selection/Selection.jsx";
@@ -6,6 +6,7 @@ import Settings from "../Settings/Settings.jsx";
 import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 import Camera from "../Camera/Camera.jsx";
 import ResultPage from "../ResultPage/ResultPage.jsx";
+import { useEffect } from 'react';
 
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
@@ -76,6 +77,11 @@ function App() {
       isLightMode={isLightMode}
     />,
   ];
+
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
 
   return (
     <div className={`${isLightMode ? "bg-white" : "bg-gray-900"}`}>

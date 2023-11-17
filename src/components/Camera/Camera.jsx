@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Webcam from "react-webcam";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "./Camera.css";
 
@@ -88,15 +88,14 @@ function Camera(props) {
     }
   }
 
+  useEffect(() => { //this code will run after the render, for tts
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
   return (
-    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col">
-      <button
-        className="bg-red-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center"
-        onClick={props.toPrevPage}
-      >
-        <span className="text-center text-base sm:text-lg">Back</span>
-      </button>
-      <div className="image-container border-slate-700 border-4 rounded-lg">
+    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col" alt="container">
+      <div className="image-container border-slate-700 border-4 rounded-lg" alt="container">
         {imgSrc ? (
           <img
             id="img_src"
@@ -106,25 +105,14 @@ function Camera(props) {
             height="300"
           />
         ) : (
-          <div className="webcam">
-            <div id="webcam-container" className="flex justify-center">
-              <div className="frame"></div>
-            </div>
-          </div>
+          <div id="webcam-container" alt="webcam container"></div>
         )}
       </div>
-      {imgSrc ? (
-        <></>
-      ) : (
-        <div className="text-sm italic text-white bg-slate-700 rounded-md border-transparent mt-4 px-4 py-2">
-          Please ensure the test is in frame and properly lit.
-        </div>
-      )}
-
-      <div className="">
+      <div className="" alt="buttons container">
         {imgSrc ? (
           <button
-            className="btn text-black border-transparent rounded-md bg-yellow-400 px-4 py-2"
+            className="btn text-black border-transparent rounded-md bg-yellow-400  px-4 py-2"
+            alt="retake photo button"
             onClick={tryAgain}
           >
             Retake photo
@@ -133,6 +121,7 @@ function Camera(props) {
           <div className="flex gap-2 flex-col">
             <button
               className={`btn text-black border-transparent rounded-md bg-blue-400  px-4 py-2 `}
+              alt="open webcam button"
               onClick={init}
             >
               Open Webcam
@@ -150,7 +139,8 @@ function Camera(props) {
       {imgSrc ? (
         <div
           id="results-list"
-          className="bg-slate-500 border-2 border-grey-700 rounded-lg p-6 mt-4"
+          alt="results list"
+          className="border-2 border-grey-700 rounded-lg p-6 mt-4"
         ></div>
       ) : (
         <></>
