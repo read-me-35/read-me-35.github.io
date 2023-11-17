@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Home from "../Home/Home.jsx";
 import Selection from "../Selection/Selection.jsx";
@@ -51,6 +51,11 @@ function App() {
       toNextPage={nextPage}
     />,
   ];
+
+  useEffect(() => { //this code will run after the render
+    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+    window.speechSynthesis.speak(utterance);
+  }, []);
 
   return (
     <div className={`${isLightMode ? "bg-white" : "bg-gray-900"}`}>

@@ -20,30 +20,32 @@ function ResultPage({ results }, props) {
   const ButtonText = ["Info", "Try Again"];
 
   return (
-    <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center">
-      <div className="flex-1 flex flex-col justify-center items-center space-y-4">
+    <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center" alt="container">
+      <div className="flex-1 flex flex-col justify-center items-center space-y-4" alt="container">
         <button
           className="bg-yellow-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2"
+          alt="return home button"
           onClick={pageIndex == 1}
         >
-          <span>Home</span>
+          <span alt="Home text">Home</span>
           <img
             src="path-to-your-image.png" // Replace with the actual path to your image
             alt="Icon"
             className="w-6 h-6"
           />
         </button>
-        <div className="text-gray-300 text-center">
-          <p>{results}</p>
+        <div className="text-gray-300 text-center" alt="results">
+          <p alt="results text">{results}</p>
         </div>
-        <div className="text-center">
-          <p>{sentences[messageIndex]}</p>
+        <div className="text-center" alt="description">
+          <p alt="description text">{sentences[messageIndex]}</p>
         </div>
         <button
           className="bg-blue-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2"
+          alt="next button"
           onClick={handleNextClick}
         >
-          <span>{ButtonText[ButtonTextIndex]}</span>
+          <span alt="button text">{ButtonText[ButtonTextIndex]}</span>
           <img
             src="/assets/images/covidimage.png"
             alt="Icon"
