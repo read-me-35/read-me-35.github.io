@@ -28,7 +28,6 @@ function Camera(props) {
   const [imgSrc, setImgSrc] = useState(null);
   const flip = false;
   const [webcam, setWebCam] = useState(new tmImage.Webcam(300, 300, flip));
-  const [results, setResults] = useState([]);
   //const [isCamOn, setCamOn] = useState(false);
 
   // Load the image model and setup the webcam
@@ -74,8 +73,7 @@ function Camera(props) {
 
     results = Object.entries(results).sort((a, b) => b[1] - a[1]);
     console.log(results);
-    setResults(results);
-    console.log({results});
+    props.setResults(results);
 
     //for each entry, create a new html element and append to the label container
     for (let i = 0; i < results.length; i++) {
@@ -122,11 +120,9 @@ function Camera(props) {
               Retake photo
             </button>
             <button
-            className="btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2"
+            className={`btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2`}
             alt="see result button"
-            onClick={() => 
-              props.toNextPage(results)
-            } // Use the toNextPage function to navigate
+            onClick={() => props.toNextPage()} // Use the toNextPage function to navigate
           >
             See result
           </button>

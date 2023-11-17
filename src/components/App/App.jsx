@@ -11,6 +11,7 @@ function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
   const [currentTestType, setCurrentTestType] = useState(""); // ["covid", "pregnancy", "ph"
+  const [results, setResults] = useState(null); // Initialize results state
 
   const toggleMode = () => {
     setLightMode(!isLightMode);
@@ -19,6 +20,11 @@ function App() {
   const nextPage = () => {
     if (pageIndex !== pages.length - 1)
       setPageIndex((pageIndex) => pageIndex + 1);
+
+      // If the next page is ResultPage, pass the results state
+    if (pageIndex === pages.length - 2) {
+      pages[pageIndex + 1] = React.cloneElement(pages[pageIndex + 1], { results });
+    }
   };
 
   const previousPage = () => {
@@ -67,7 +73,7 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
-      setPageIndex={setPageIndex} // Pass the setPageIndex function to the Camera component
+      setResults={setResults} // Pass the setResults function as a prop
     />,
     <ResultPage
       key="resultPage"
@@ -75,6 +81,8 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
+      results={results} // Pass the results state as a prop
+      setPageIndex={setPageIndex} // Pass the setPageIndex function as a prop
     />,
   ];
 
