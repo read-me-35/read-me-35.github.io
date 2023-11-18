@@ -11,30 +11,33 @@ function ResultPage({ results, setPageIndex, pages }, props) {
   const sentences = [
     "You Tested Covid Positive\nThe test reads two solid lines ",
     "You Tested Covid Negative\nThe test reads one solid line ",
-    "You Tested Inconclusive",
     "Unable to Read Test\nPlease Try Again",
   ];
 
-  const handleNextClick = () => {
-    if (ButtonText[ButtonTextIndex] === "Try Again") {
-      // Navigate to the selection page when the button text is "Try Again"
-      setPageIndex(pages.findIndex((page) => page.key === "selection"));
-    } else {
-      // Proceed with the default behavior for other button texts
-      setMessageIndex((prevIndex) =>
-        prevIndex < sentences.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    }
-  };
+  const result = [
+    "Positive",
+    "Negative",
+    "Inconclusive",
+  ];
 
   const [ButtonTextIndex, setButtonIndex] = useState(0);
   const ButtonText = [
     "Info",
     "Try Again",
   ];
-  const buttonImage = results && results.length > 0 && results[0][0].includes("Invalid")
-    ? tryAgain
-    : external;
+  const handleNextClick = () => {
+    console.log("Next button clicked");
+    if (ButtonText[ButtonTextIndex] === "Try Again") {
+      console.log("Navigating to the selection page");
+      //setPageIndex(pages.findIndex((page) => page.key === "selection"));
+      props.toNextPage();
+    } else {
+      console.log("Proceeding to the next message");
+      setMessageIndex((prevIndex) =>
+        prevIndex < sentences.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    }
+  };
 
   useEffect(() => {
     console.log("Results:", results);
@@ -45,20 +48,19 @@ function ResultPage({ results, setPageIndex, pages }, props) {
     // Update messageIndex based on the result
     if (firstResult.includes("Positive")) {
       setMessageIndex(0);
+      setButtonIndex(0);//Info
     } else if (firstResult.includes("Negative")) {
       setMessageIndex(1);
+      setButtonIndex(0);//Info
     } else {
-      setMessageIndex(2); // Inconclusive
-    }
-
-    // If the result is "Invalid", set the button text to "Try Again"
-    if (firstResult.includes("Invalid")) {
-      setButtonIndex(1); // Set ButtonTextIndex to 1 (index for "Try Again")
+      setMessageIndex(2);
+      setButtonIndex(1); // Inconclusive
     }
 
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, [results]);
+  const buttonImage = ButtonTextIndex === 1 ? tryAgain : external;
 
   return (
     <div className="bg-gray-900 text-black h-screen flex flex-col justify-start items-center">
@@ -79,23 +81,8 @@ function ResultPage({ results, setPageIndex, pages }, props) {
         </span>
       </button>
       <div className="bg-gray-700 p-6 rounded-lg w-80 flex flex-col justify-center items-center mt-4 custom-height">
-      <div className="text-black text-center" alt="description">
-        {results && results.length > 0 && results[0][0].includes("Positive") && (
-          <p alt="description text">
-            <span style={{ textDecoration: "underline" }}>Covid Positive</span>
-          </p>
-        )}
-        {results && results.length > 0 && results[0][0].includes("Negative") && (
-          <p alt="description text">
-            <span style={{ textDecoration: "underline" }}>Covid Negative</span>
-          </p>
-        )}
-        {!results || (results.length === 0 && (
-          <p alt="description text">{sentences[messageIndex]}</p>
-        ))}
-      </div>
-      <div className="flex flex-col items-center mt-4">
-        <p className="text-lg font-bold" alt="additional text">
+      <div className="flex flex-col items-center mt-4 custom-text">
+        <p className="text-lg font-bold custom-text" alt="additional text">
           Result:
         </p>
         {results && results.length > 0 && results[0][0].includes("Invalid") ? (
@@ -111,14 +98,17 @@ function ResultPage({ results, setPageIndex, pages }, props) {
             className="w-32 h-32 mt-6"
           />
         )}
+        <div className="text-black text-center mt-8 custom-subTitle" alt="description">
+          <p style={{ textDecoration: "underline" }} alt="Test result">{result[messageIndex]}</p>
+        </div>
       </div>
-        <div className="text-black text-center mt-8" alt="description">
+        <div className="text-black text-center mt-8 custom-text" alt="description">
           <p alt="description text">{sentences[messageIndex]}</p>
         </div>
         <button
           className="bg-blue-300 text-black px-8 py-4 rounded-lg flex items-center space-x-2 mt-4"
           alt="next button"
-          onClick={handleNextClick}
+          onClick={() => props.toNextPage()}
         >
           <span className="text-lg font-bold" alt="button text">
             {ButtonText[ButtonTextIndex]}

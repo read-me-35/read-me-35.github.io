@@ -22,8 +22,8 @@ function App() {
       setPageIndex((pageIndex) => pageIndex + 1);
 
       // If the next page is ResultPage, pass the results state
-    if (pageIndex === pages.length - 2) {
-      pages[pageIndex + 1] = React.cloneElement(pages[pageIndex + 1], { results });
+    if (pageIndex === pages.length - 1) {
+      setPageIndex((pageIndex) => pageIndex - 1);
     }
   };
 

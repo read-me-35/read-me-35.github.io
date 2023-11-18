@@ -30,6 +30,13 @@ function Camera(props) {
   const [webcam, setWebCam] = useState(new tmImage.Webcam(300, 300, flip));
   //const [isCamOn, setCamOn] = useState(false);
 
+  // Function to stop the webcam
+  const stopWebcam = useCallback(async () => {
+    if (webcam) {
+      setImgSrc(null);
+      await webcam.pause();
+    }
+  }, [webcam]);
   // Load the image model and setup the webcam
   async function init() {
     model = await tmImage.load(modelURL, metadataURL);
@@ -122,7 +129,10 @@ function Camera(props) {
             <button
             className={`btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2`}
             alt="see result button"
-            onClick={() => props.toNextPage()} // Use the toNextPage function to navigate
+            onClick={() => {
+              stopWebcam(); // Stop the webcam when the button is clicked
+              props.toNextPage(); // Use the toNextPage function to navigate
+            }}
           >
             See result
           </button>
