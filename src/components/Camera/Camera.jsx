@@ -13,7 +13,7 @@ function Camera(props) {
       //URL = "https://teachablemachine.withgoogle.com/models/s9rU1K5RQ/"; // Model V1 (prototype 2)
       break;
     case "pregnancy":
-      URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
+      URL = "https://teachablemachine.withgoogle.com/models/ZY-vO78Pu/"; // Pregnancy Model
       break;
     case "ph":
       URL = "https://teachablemachine.withgoogle.com/models/VE_WTQuBT/"; // default shape model placeholder
