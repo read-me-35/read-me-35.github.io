@@ -21,7 +21,7 @@ function App() {
     if (pageIndex !== pages.length - 1)
       setPageIndex((pageIndex) => pageIndex + 1);
 
-      // If the next page is ResultPage, pass the results state
+    // If the next page is ResultPage, pass the results state
     if (pageIndex === pages.length - 1) {
       setPageIndex((pageIndex) => pageIndex - 1);
     }
@@ -29,6 +29,14 @@ function App() {
 
   const previousPage = () => {
     if (pageIndex !== 0) setPageIndex((pageIndex) => pageIndex - 1);
+  };
+
+  const backToTestPage = () => {
+    setPageIndex(4);
+  };
+
+  const backToHomePage = () => {
+    setPageIndex(1);
   };
 
   const onClickCovid = () => {
@@ -83,10 +91,13 @@ function App() {
       isLightMode={isLightMode}
       results={results} // Pass the results state as a prop
       setPageIndex={setPageIndex} // Pass the setPageIndex function as a prop
+      backToTestPage={backToTestPage}
+      backToHomePage={backToHomePage}
     />,
   ];
 
-  useEffect(() => { //this code will run after the render
+  useEffect(() => {
+    //this code will run after the render
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, []);

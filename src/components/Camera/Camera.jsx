@@ -34,7 +34,7 @@ function Camera(props) {
   const stopWebcam = useCallback(async () => {
     if (webcam) {
       setImgSrc(null);
-      await webcam.pause();
+      await webcam.stop();
     }
   }, [webcam]);
   // Load the image model and setup the webcam
@@ -96,14 +96,21 @@ function Camera(props) {
     }
   }
 
-  useEffect(() => { //this code will run after the render, for tts
+  useEffect(() => {
+    //this code will run after the render, for tts
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, []);
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col" alt="container">
-      <div className="image-container border-slate-700 border-4 rounded-lg" alt="container">
+    <div
+      className="flex w-screen h-screen justify-center items-center gap-4 flex-col"
+      alt="container"
+    >
+      <div
+        className="image-container border-slate-700 border-4 rounded-lg"
+        alt="container"
+      >
         {imgSrc ? (
           <img
             id="img_src"
@@ -127,15 +134,15 @@ function Camera(props) {
               Retake photo
             </button>
             <button
-            className={`btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2`}
-            alt="see result button"
-            onClick={() => {
-              stopWebcam(); // Stop the webcam when the button is clicked
-              props.toNextPage(); // Use the toNextPage function to navigate
-            }}
-          >
-            See result
-          </button>
+              className={`btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2`}
+              alt="see result button"
+              onClick={() => {
+                stopWebcam(); // Stop the webcam when the button is clicked
+                props.toNextPage(); // Use the toNextPage function to navigate
+              }}
+            >
+              See result
+            </button>
           </div>
         ) : (
           <div className="flex gap-2 flex-col">
@@ -155,7 +162,7 @@ function Camera(props) {
           </div>
         )}
       </div>
-  
+
       {imgSrc ? (
         <div
           id="results-list"
@@ -167,7 +174,6 @@ function Camera(props) {
       )}
     </div>
   );
-  
 }
 
 export default Camera;
