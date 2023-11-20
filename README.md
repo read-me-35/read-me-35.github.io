@@ -65,7 +65,7 @@ The Blind Medical Test Reader WebApp is released under the [MIT License](https:/
 
 ---
 
-Thank you for choosing the Blind Medical Test Reader WebApp. We hope it provides valuable assistance to visually impaired individuals in understanding their medical test results.
+Thank you for choosing ReadMe!. We hope it provides valuable assistance to visually impaired individuals in understanding their medical test results.
 
 ## Group information
 
