@@ -1,71 +1,166 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
+import home from "../../assets/images/homeimage.png";
+import covid from "../../assets/images/covidimage.png";
+import pregnancy from "../../assets/images/pregnancyimage.webp";
+import external from "../../assets/images/external-link.png";
+import question from "../../assets/images/question-sign.png";
+import tryAgain from "../../assets/images/tryagainimage.png";
+import { getResults } from "../resultManager.js";
 
-function ResultPage({ results }, props) {
-  const [messageIndex, setMessageIndex] = useState(0);
+function ResultPage(props) {
   const sentences = [
-    "You Tested Covid Positive\nThe test reads two solid lines ",
-    "You Tested Covid Negative\nThe test reads one solid line ",
-    "You Tested Inconclusive",
-    "Unable to Read Test\nPlease Try Again",
+    "You Tested Covid Positive.\nThe test reads two solid lines.",
+    "You Tested Covid Negative.\nThe test reads a solid control line and a blank test line.",
+    "Unable to Read Covid Test.\nPlease Try Again.",
+    "You are Pregnant.\nThe test reads two solid lines.",
+    "You are Not Pregnant.\nThe test reads a solid control line and a blank test line.",
+    "Unable to Read Pregnancy Test.\nPlease Try Again.",
   ];
 
-  const handleNextClick = () => {
-    // Update the message index to display the next message
-    setMessageIndex((prevIndex) =>
-      prevIndex < sentences.length - 1 ? prevIndex + 1 : prevIndex
-    );
-  };
-
-  const [ButtonTextIndex, setButtonIndex] = useState(0);
-  const ButtonText = [
-    "Info",
-    "Try Again",
+  const links = [
+    "https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/testing.html",
+    "https://www.pregnancyinfo.ca/",
   ];
 
-  useEffect(() => { //this code will run after the render, for tts
+  const results = getResults();
+  console.log("Obtained results: ", results);
+  console.log("result text: ", results[0][0]);
+
+  let img = null;
+  let text = "";
+  let activeLink = null;
+  switch (props.testType) {
+    case "covid":
+      activeLink = links[0];
+      switch (results[0][0]) {
+        case "0.Positive":
+          text = sentences[0];
+          img = covid;
+          break;
+        case "1.Negative":
+          text = sentences[1];
+          img = covid;
+          break;
+        case "2.Invalid":
+          text = sentences[2];
+          img = question;
+          break;
+        case "3.Null":
+          text = sentences[2];
+          img = question;
+          break;
+        default:
+          text = "";
+          img = question;
+          break;
+      }
+      break;
+    case "pregnancy":
+      activeLink = links[1];
+      switch (results[0][0]) {
+        case "0.Pregnant":
+          text = sentences[3];
+          img = pregnancy;
+          break;
+        case "1.Not Pregnant":
+          text = sentences[4];
+          img = pregnancy;
+          break;
+        case "2.Invalid":
+          text = sentences[5];
+          img = question;
+          break;
+        default:
+          text = "";
+          img = question;
+          break;
+      }
+  }
+
+  useEffect(() => {
+    // Check the first element at index [0][0] of the results array
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
-  }, []);
-
-
-  useEffect(() => { //this code will run after the render, for tts
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
-    window.speechSynthesis.speak(utterance);
-  }, []);
+  }, [results]);
 
   return (
-    <div className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center" alt="container">
-      <div className="flex-1 flex flex-col justify-center items-center space-y-4" alt="container">
+    <div className="bg-gray-900 text-black h-screen flex flex-col justify-start items-center">
+      <div
+        className="flex-1 flex flex-col justify-center items-center space-y-4"
+        alt="container"
+      >
         <button
-          className="bg-yellow-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2"
+          className="bg-red-500 text-black h-14 px-4 py-2 rounded-lg flex items-center flex-row space-x-2 gap-2"
           alt="return home button"
-          onClick={pageIndex == 1}
+          onClick={() => {
+            props.backToHomePage();
+          }}
         >
-          <span alt="Home text">Home</span>
-          <img
-            src="path-to-your-image.png" // Replace with the actual path to your image
-            alt="Icon"
-            className="w-6 h-6"
-          />
+          <img src={home} alt="Icon" className="w-10 h-10" />
+          <span className="text-lg text-black font-bold" alt="Home text">
+            Home
+          </span>
         </button>
-        <div className="text-gray-300 text-center" alt="results">
-          <p alt="results text">{results}</p>
+        <div className="bg-gray-700 w-52 p-4 rounded-lg flex flex-col justify-center items-center gap-4">
+          <p className="text-lg font-bold text-gray-300" alt="additional text">
+            Result:
+          </p>
+
+          <img src={img} alt="Result Image" className="w-16 h-16" />
+
+          <div className="text-black text-center" alt="description">
+            <p className="underline text-gray-300 text-2xl" alt="Test result">
+              {results[0][0].split(".")[1]}
+            </p>
+            <p className=" text-gray-300 text-lg" alt="Test result">
+              {`Accuracy : ${results[0][1]}%`}
+            </p>
+          </div>
+
+          <div className="text-gray-300 text-center text-sm flex flex-col gap-2">
+            <div className="border-2 border-gray-600 rounded-lg p-2">
+              <p alt="description">{text}</p>
+            </div>
+            <p className="font-bold text-xs" alt="description">
+              Warning: This result may not be entirely reliable, as it was
+              calculated by a computer.
+            </p>
+            <div className="border-2 border-gray-600 bg-gray-600 rounded-lg p-2">
+              <p className="italic" alt="description">
+                Visit the link below for more information. This is an external
+                site.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="text-center" alt="description">
-          <p alt="description text">{sentences[messageIndex]}</p>
+        <div className="flex flex-col gap-4">
+          <button
+            className="bg-yellow-300 text-black h-14 px-4 py-2 rounded-lg flex flex-row items-center space-x-2 gap-2"
+            alt="next button"
+            onClick={() => {
+              props.backToTestPage();
+            }}
+          >
+            <img src={tryAgain} alt="Icon" className="w-10 h-10" />
+            <span className="text-lg font-bold" alt="button text">
+              Try again
+            </span>
+          </button>
+          <button
+            className="bg-blue-300 text-black h-14 px-4 py-2 rounded-lg flex items-center flex-row space-x-2 gap-2"
+            alt="next button"
+            onClick={() => {
+              props.backToTestPage();
+            }}
+          >
+            <img src={external} alt="Icon" className="w-8 h-8" />
+            <a href={activeLink} target="_blank" rel="noreferrer">
+              <span className="text-lg font-bold" alt="button text">
+                More info
+              </span>
+            </a>
+          </button>
         </div>
-        <button
-          className="bg-blue-300 text-white px-8 py-4 rounded-lg flex flex-col items-center space-y-2"
-          alt="next button"
-          onClick={handleNextClick}
-        >
-          <span alt="button text">{ButtonText[ButtonTextIndex]}</span>
-          <img
-            src="/assets/images/covidimage.png"
-            alt="Icon"
-            className="w-6 h-6"
-          />
-        </button>
       </div>
     </div>
   );

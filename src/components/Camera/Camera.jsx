@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "./Camera.css";
+import { setResults } from "../resultManager.js";
 
 function Camera(props) {
   let URL;
@@ -30,6 +31,13 @@ function Camera(props) {
   const [webcam, setWebCam] = useState(new tmImage.Webcam(300, 300, flip));
   //const [isCamOn, setCamOn] = useState(false);
 
+  // Function to stop the webcam
+  const stopWebcam = useCallback(async () => {
+    if (webcam) {
+      setImgSrc(null);
+      await webcam.stop();
+    }
+  }, [webcam]);
   // Load the image model and setup the webcam
   async function init() {
     model = await tmImage.load(modelURL, metadataURL);
@@ -46,7 +54,7 @@ function Camera(props) {
 
   async function takePicture() {
     setImgSrc(webcam.canvas.toDataURL("image/jpeg"));
-    getPrediction();
+    await getPrediction();
   }
 
   async function tryAgain() {
@@ -74,6 +82,8 @@ function Camera(props) {
     results = Object.entries(results).sort((a, b) => b[1] - a[1]);
     console.log(results);
 
+    setResults(results);
+
     //for each entry, create a new html element and append to the label container
     for (let i = 0; i < results.length; i++) {
       const entry = document.createElement("h2");
@@ -88,14 +98,30 @@ function Camera(props) {
     }
   }
 
-  useEffect(() => { //this code will run after the render, for tts
+  useEffect(() => {
+    //this code will run after the render, for tts
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, []);
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center gap-4 flex-col" alt="container">
-      <div className="image-container border-slate-700 border-4 rounded-lg" alt="container">
+    <div
+      className="flex w-screen h-screen justify-center items-center gap-4 flex-col"
+      alt="container"
+    >
+      <button
+        className="bg-red-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2"
+        alt="back button"
+        onClick={props.toPrevPage}
+      >
+        <span className="text-center" alt="back text">
+          Back
+        </span>
+      </button>
+      <div
+        className="image-container border-slate-700 border-4 rounded-lg"
+        alt="container"
+      >
         {imgSrc ? (
           <img
             id="img_src"
@@ -110,13 +136,25 @@ function Camera(props) {
       </div>
       <div className="" alt="buttons container">
         {imgSrc ? (
-          <button
-            className="btn text-black border-transparent rounded-md bg-yellow-400  px-4 py-2"
-            alt="retake photo button"
-            onClick={tryAgain}
-          >
-            Retake photo
-          </button>
+          <div className="flex gap-2 flex-col">
+            <button
+              className="btn text-black border-transparent rounded-md bg-yellow-400  px-4 py-2"
+              alt="retake photo button"
+              onClick={tryAgain}
+            >
+              Retake photo
+            </button>
+            <button
+              className={`btn text-black border-transparent rounded-md bg-blue-400 px-4 py-2`}
+              alt="see result button"
+              onClick={() => {
+                stopWebcam(); // Stop the webcam when the button is clicked
+                props.toNextPage(); // Use the toNextPage function to navigate
+              }}
+            >
+              See result
+            </button>
+          </div>
         ) : (
           <div className="flex gap-2 flex-col">
             <button

@@ -11,6 +11,7 @@ function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
   const [currentTestType, setCurrentTestType] = useState(""); // ["covid", "pregnancy", "ph"
+  //const [results, setResults] = useState(null); // Initialize results state
 
   const toggleMode = () => {
     setLightMode(!isLightMode);
@@ -19,10 +20,23 @@ function App() {
   const nextPage = () => {
     if (pageIndex !== pages.length - 1)
       setPageIndex((pageIndex) => pageIndex + 1);
+
+    // If the next page is ResultPage, pass the results state
+    if (pageIndex === pages.length - 1) {
+      setPageIndex((pageIndex) => pageIndex - 1);
+    }
   };
 
   const previousPage = () => {
     if (pageIndex !== 0) setPageIndex((pageIndex) => pageIndex - 1);
+  };
+
+  const backToTestPage = () => {
+    setPageIndex(4);
+  };
+
+  const backToHomePage = () => {
+    setPageIndex(1);
   };
 
   const onClickCovid = () => {
@@ -74,10 +88,14 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
+      setPageIndex={setPageIndex} // Pass the setPageIndex function as a prop
+      backToTestPage={backToTestPage}
+      backToHomePage={backToHomePage}
     />,
   ];
 
-  useEffect(() => { //this code will run after the render
+  useEffect(() => {
+    //this code will run after the render
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
   }, []);

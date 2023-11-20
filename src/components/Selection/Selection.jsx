@@ -36,10 +36,10 @@ function Selection(props) {
           <img src={preg} alt="Select Pregnancy Testing" className="w-6 h-6" />
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
-          onClick={() => {
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2 cursor-not-allowed opacity-50"
+          /*onClick={() => {
             props.onClickPH(), props.toNextPage();
-          }}
+          }}*/
         >
           <span className="text-center text-base sm:text-lg">PH Level</span>
           <img src={ph} alt="Select PH Level Testing" className="w-6 h-6" />
