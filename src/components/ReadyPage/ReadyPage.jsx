@@ -48,9 +48,15 @@ function ReadyPage(props) {
           </span>
         </button>
         <div
-          className="bg-gray-700 w-48 h-48 rounded-lg flex flex-col justify-center items-center"
+          className="bg-gray-700 w-48 p-4 rounded-lg flex flex-col justify-center items-center"
           alt="prep container"
         >
+          <h2
+            className="text-xl font-bold text-center text-gray-300"
+            alt="title text"
+          >
+            {titleText}
+          </h2>
           <img
             src={img} // Replace with the actual path to your image
             alt="Image"

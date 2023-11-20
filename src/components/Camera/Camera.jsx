@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "./Camera.css";
+import { setResults } from "../resultManager.js";
 
 function Camera(props) {
   let URL;
@@ -80,7 +81,8 @@ function Camera(props) {
 
     results = Object.entries(results).sort((a, b) => b[1] - a[1]);
     console.log(results);
-    props.setResults(results);
+
+    setResults(results);
 
     //for each entry, create a new html element and append to the label container
     for (let i = 0; i < results.length; i++) {
@@ -107,6 +109,15 @@ function Camera(props) {
       className="flex w-screen h-screen justify-center items-center gap-4 flex-col"
       alt="container"
     >
+      <button
+        className="bg-red-500 text-white px-6 py-3 rounded-lg w-36 flex flex-col items-center space-y-2"
+        alt="back button"
+        onClick={props.toPrevPage}
+      >
+        <span className="text-center" alt="back text">
+          Back
+        </span>
+      </button>
       <div
         className="image-container border-slate-700 border-4 rounded-lg"
         alt="container"

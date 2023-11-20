@@ -11,7 +11,7 @@ function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
   const [currentTestType, setCurrentTestType] = useState(""); // ["covid", "pregnancy", "ph"
-  const [results, setResults] = useState(null); // Initialize results state
+  //const [results, setResults] = useState(null); // Initialize results state
 
   const toggleMode = () => {
     setLightMode(!isLightMode);
@@ -81,7 +81,6 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
-      setResults={setResults} // Pass the setResults function as a prop
     />,
     <ResultPage
       key="resultPage"
@@ -89,7 +88,6 @@ function App() {
       toNextPage={nextPage}
       testType={currentTestType}
       isLightMode={isLightMode}
-      results={results} // Pass the results state as a prop
       setPageIndex={setPageIndex} // Pass the setPageIndex function as a prop
       backToTestPage={backToTestPage}
       backToHomePage={backToHomePage}

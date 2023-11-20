@@ -5,16 +5,16 @@ import pregnancy from "../../assets/images/pregnancyimage.webp";
 import external from "../../assets/images/external-link.png";
 import question from "../../assets/images/question-sign.png";
 import tryAgain from "../../assets/images/tryagainimage.png";
-import "./ResultPage.css";
+import { getResults } from "../resultManager.js";
 
 function ResultPage(props) {
   const sentences = [
-    "You Tested Covid Positive.\nThe test reads two solid lines ",
-    "You Tested Covid Negative.\nThe test reads a solid control line and a blank test line",
-    "Unable to Read Covid Test.\nPlease Try Again",
-    "You are Pregnant.\nThe test reads two solid lines",
-    "You are Not Pregnant.\nThe test reads a solid control line and a blank test line",
-    "Unable to Read Pregnancy Test.\nPlease Try Again",
+    "You Tested Covid Positive.\nThe test reads two solid lines.",
+    "You Tested Covid Negative.\nThe test reads a solid control line and a blank test line.",
+    "Unable to Read Covid Test.\nPlease Try Again.",
+    "You are Pregnant.\nThe test reads two solid lines.",
+    "You are Not Pregnant.\nThe test reads a solid control line and a blank test line.",
+    "Unable to Read Pregnancy Test.\nPlease Try Again.",
   ];
 
   const links = [
@@ -22,13 +22,17 @@ function ResultPage(props) {
     "https://www.pregnancyinfo.ca/",
   ];
 
+  const results = getResults();
+  console.log("Obtained results: ", results);
+  console.log("result text: ", results[0][0]);
+
   let img = null;
   let text = "";
   let activeLink = null;
   switch (props.testType) {
     case "covid":
       activeLink = links[0];
-      switch (props.results[0][0]) {
+      switch (results[0][0]) {
         case "0.Positive":
           text = sentences[0];
           img = covid;
@@ -46,19 +50,19 @@ function ResultPage(props) {
           img = question;
           break;
         default:
-          text = "Invalid, please try again";
+          text = "";
           img = question;
           break;
       }
       break;
     case "pregnancy":
       activeLink = links[1];
-      switch (props.results[0][0]) {
-        case "0.Positive":
+      switch (results[0][0]) {
+        case "0.Pregnant":
           text = sentences[3];
           img = pregnancy;
           break;
-        case "1.Negative":
+        case "1.Not Pregnant":
           text = sentences[4];
           img = pregnancy;
           break;
@@ -67,7 +71,7 @@ function ResultPage(props) {
           img = question;
           break;
         default:
-          text = "Invalid, please try again";
+          text = "";
           img = question;
           break;
       }
@@ -77,69 +81,84 @@ function ResultPage(props) {
     // Check the first element at index [0][0] of the results array
     let utterance = new SpeechSynthesisUtterance(document.body.innerText);
     window.speechSynthesis.speak(utterance);
-  }, [props.results]);
+  }, [results]);
 
   return (
     <div className="bg-gray-900 text-black h-screen flex flex-col justify-start items-center">
-      <button
-        className="bg-red-500 custom-button text-black w-80 py-4 rounded-lg flex space-x-2 mt-4 justify-center items-center"
-        alt="return home button"
-        onClick={() => {
-          props.backToHomePage();
-        }}
+      <div
+        className="flex-1 flex flex-col justify-center items-center space-y-4"
+        alt="container"
       >
-        <img src={home} alt="Icon" className="w-20 h-20" />
-        <span className="text-lg font-bold custom-button" alt="Home text">
-          Home
-        </span>
-      </button>
-      <div className="bg-gray-700 p-6 rounded-lg w-80 flex flex-col justify-center items-center mt-4 custom-height">
-        <div className="flex flex-col items-center mt-4 custom-text">
-          <p className="text-lg font-bold custom-text" alt="additional text">
+        <button
+          className="bg-red-500 text-black h-14 px-4 py-2 rounded-lg flex items-center flex-row space-x-2 gap-2"
+          alt="return home button"
+          onClick={() => {
+            props.backToHomePage();
+          }}
+        >
+          <img src={home} alt="Icon" className="w-10 h-10" />
+          <span className="text-lg text-black font-bold" alt="Home text">
+            Home
+          </span>
+        </button>
+        <div className="bg-gray-700 w-52 p-4 rounded-lg flex flex-col justify-center items-center gap-4">
+          <p className="text-lg font-bold text-gray-300" alt="additional text">
             Result:
           </p>
 
-          <img src={img} alt="Result Image" className="w-32 h-32 mt-6" />
+          <img src={img} alt="Result Image" className="w-16 h-16" />
 
-          <div
-            className="text-black text-center mt-8 custom-subTitle"
-            alt="description"
-          >
-            <p style={{ textDecoration: "underline" }} alt="Test result">
-              {props.results[0][0] && props.results[0][0].split(".")[1]}
+          <div className="text-black text-center" alt="description">
+            <p className="underline text-gray-300 text-2xl" alt="Test result">
+              {results[0][0].split(".")[1]}
+            </p>
+            <p className=" text-gray-300 text-lg" alt="Test result">
+              {`Accuracy : ${results[0][1]}%`}
             </p>
           </div>
+
+          <div className="text-gray-300 text-center text-sm flex flex-col gap-2">
+            <div className="border-2 border-gray-600 rounded-lg p-2">
+              <p alt="description">{text}</p>
+            </div>
+            <p className="font-bold text-xs" alt="description">
+              Warning: This result may not be entirely reliable, as it was
+              calculated by a computer.
+            </p>
+            <div className="border-2 border-gray-600 bg-gray-600 rounded-lg p-2">
+              <p className="italic" alt="description">
+                Visit the link below for more information. This is an external
+                site.
+              </p>
+            </div>
+          </div>
         </div>
-        <div
-          className="text-black text-center mt-8 custom-text"
-          alt="description"
-        >
-          <p alt="description text">{text}</p>
-        </div>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col gap-4">
           <button
-            className="bg-yellow-300 text-black px-8 py-4 rounded-lg flex flex-row items-center space-x-2 mt-4"
+            className="bg-yellow-300 text-black h-14 px-4 py-2 rounded-lg flex flex-row items-center space-x-2 gap-2"
             alt="next button"
             onClick={() => {
               props.backToTestPage();
             }}
           >
+            <img src={tryAgain} alt="Icon" className="w-10 h-10" />
             <span className="text-lg font-bold" alt="button text">
               Try again
             </span>
-            <img src={tryAgain} alt="Icon" className="w-8 h-8" />
           </button>
           <button
-            className="bg-blue-300 text-black px-8 py-4 rounded-lg flex items-center flex-row space-x-2 mt-4"
+            className="bg-blue-300 text-black h-14 px-4 py-2 rounded-lg flex items-center flex-row space-x-2 gap-2"
             alt="next button"
             onClick={() => {
               props.backToTestPage();
             }}
           >
-            <a href={activeLink} target="_blank" rel="noreferrer">
-              Info
-            </a>
             <img src={external} alt="Icon" className="w-8 h-8" />
+            <a href={activeLink} target="_blank" rel="noreferrer">
+              <span className="text-lg font-bold" alt="button text">
+                More info
+              </span>
+            </a>
           </button>
         </div>
       </div>
