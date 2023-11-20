@@ -21,25 +21,25 @@ To set up this application locally, please follow these steps:
 
 1. Clone the repository:
 
-   ````bash
+   ```
    git clone https://github.com/Resultats-de-Testes-Accessibles/RTA.git
    ```
 
 2. Navigate to the project directory:
 
-   ````bash
+   ```
    cd RTA
    ```
 
 3. Install the dependencies:
 
-   ````bash
+   ```
    npm install
    ```
 
 4. Start the web application:
 
-   ````bash
+   ```
    npm run dev
    ```
 
