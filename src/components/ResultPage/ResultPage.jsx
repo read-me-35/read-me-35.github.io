@@ -24,8 +24,6 @@ function ResultPage(props) {
 
   const results = getResults();
   const testType = getCurrentTestType();
-  console.log("Obtained results: ", results);
-  console.log("result text: ", results[0][0]);
 
   let img = null;
   let text = "";
@@ -33,7 +31,6 @@ function ResultPage(props) {
   switch (testType) {
     case "covid":
       activeLink = links[0];
-      console.log("111111 result" + results[0][0]);
       switch (results[0][0]) {
         case "0.Positive":
           text = sentences[0];
@@ -156,9 +153,6 @@ function ResultPage(props) {
           <button
             className="bg-blue-300 text-black h-14 px-4 py-2 rounded-lg flex items-center flex-row space-x-2 gap-2"
             alt="next button"
-            onClick={() => {
-              props.backToTestPage();
-            }}
           >
             <img src={external} alt="Icon" className="w-8 h-8" />
             <a href={activeLink} target="_blank" rel="noreferrer">

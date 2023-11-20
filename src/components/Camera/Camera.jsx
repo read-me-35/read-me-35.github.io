@@ -88,7 +88,6 @@ function Camera(props) {
     }
 
     results = Object.entries(results).sort((a, b) => b[1] - a[1]);
-    console.log(results);
 
     setResults(results);
 
