@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef, no-unused-vars */
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
