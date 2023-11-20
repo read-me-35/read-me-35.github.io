@@ -12,10 +12,15 @@ or
 npm i
 ```
 
-To run the app, run the following command:
+To run the app locally, run the following command:
 
 ```
 npm run dev
+```
+
+To deploy on github pages, run the following command:
+```
+npm run deploy
 ```
 
 ---
