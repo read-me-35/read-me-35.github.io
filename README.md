@@ -1,6 +1,7 @@
 # ReadMe!: WebApp for Assisting Blind Individuals in Reading Medical Tests
 
 Welcome to our web application designed to assist blind individuals in reading medical tests. This application aims to provide a user-friendly interface that enables blind users to interpret and understand various medical test results.
+You can see the application [*here*](https://read-me.app)!
 
 ## Table of Contents
 
@@ -13,7 +14,6 @@ Welcome to our web application designed to assist blind individuals in reading m
 ## Introduction
 
 The app was developed to bridge the accessibility gap for visually impaired individuals when it comes to understanding medical test results. It utilizes advanced technologies to convert test results to synthesized speech and large contrasted print.
-You can see the application [here](https://resultats-de-testes-accessibles.github.io/RTA/)!
 
 ## Installation
 
