@@ -5,7 +5,7 @@ import pregnancy from "../../assets/images/pregnancyimage.webp";
 import external from "../../assets/images/external-link.png";
 import question from "../../assets/images/question-sign.png";
 import tryAgain from "../../assets/images/tryagainimage.png";
-import { getResults } from "../resultManager.js";
+import { getResults, getCurrentTestType } from "../resultManager.js";
 
 function ResultPage(props) {
   const sentences = [
@@ -23,15 +23,17 @@ function ResultPage(props) {
   ];
 
   const results = getResults();
+  const testType = getCurrentTestType();
   console.log("Obtained results: ", results);
   console.log("result text: ", results[0][0]);
 
   let img = null;
   let text = "";
   let activeLink = null;
-  switch (props.testType) {
+  switch (testType) {
     case "covid":
       activeLink = links[0];
+      console.log("111111 result" + results[0][0]);
       switch (results[0][0]) {
         case "0.Positive":
           text = sentences[0];
@@ -58,15 +60,15 @@ function ResultPage(props) {
     case "pregnancy":
       activeLink = links[1];
       switch (results[0][0]) {
-        case "0.Pregnant":
+        case "1.Pregnant":
           text = sentences[3];
           img = pregnancy;
           break;
-        case "1.Not Pregnant":
+        case "2.Not Pregnant":
           text = sentences[4];
           img = pregnancy;
           break;
-        case "2.Invalid":
+        case "3.Invalid":
           text = sentences[5];
           img = question;
           break;
@@ -75,6 +77,11 @@ function ResultPage(props) {
           img = question;
           break;
       }
+      break;
+    default:
+      text = "Testing Complete";
+      img = question;
+      break;
   }
 
   useEffect(() => {
@@ -84,7 +91,7 @@ function ResultPage(props) {
   }, [results]);
 
   return (
-    <div className="bg-gray-900 text-black h-screen flex flex-col justify-start items-center">
+    <div className="text-black h-screen flex flex-col justify-start items-center">
       <div
         className="flex-1 flex flex-col justify-center items-center space-y-4"
         alt="container"

@@ -10,7 +10,6 @@ import ResultPage from "../ResultPage/ResultPage.jsx";
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
-  const [currentTestType, setCurrentTestType] = useState(""); // ["covid", "pregnancy", "ph"
   //const [results, setResults] = useState(null); // Initialize results state
 
   const toggleMode = () => {
@@ -39,18 +38,6 @@ function App() {
     setPageIndex(1);
   };
 
-  const onClickCovid = () => {
-    setCurrentTestType("covid");
-  };
-
-  const onClickPregnancy = () => {
-    setCurrentTestType("pregnancy");
-  };
-
-  const onClickPH = () => {
-    setCurrentTestType("ph");
-  };
-
   const pages = [
     <Settings
       key="settings"
@@ -64,31 +51,24 @@ function App() {
       key="selection"
       toPrevPage={previousPage}
       toNextPage={nextPage}
-      onClickCovid={onClickCovid}
-      onClickPregnancy={onClickPregnancy}
-      onClickPH={onClickPH}
       isLightMode={isLightMode}
     />,
     <ReadyPage
       key="readyPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
-      testType={currentTestType}
     />,
     <Camera
       key="camera"
       toPrevPage={previousPage}
       toNextPage={nextPage}
-      testType={currentTestType}
       isLightMode={isLightMode}
     />,
     <ResultPage
       key="resultPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
-      testType={currentTestType}
       isLightMode={isLightMode}
-      setPageIndex={setPageIndex} // Pass the setPageIndex function as a prop
       backToTestPage={backToTestPage}
       backToHomePage={backToHomePage}
     />,

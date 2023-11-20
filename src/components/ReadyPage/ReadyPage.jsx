@@ -3,11 +3,13 @@ import pregnancy from "../../assets/images/pregnancyimage.webp";
 import ph from "../../assets/images/phimage.png";
 import defaultImage from "../../assets/images/scanimage.png";
 import { useEffect } from "react";
+import { getCurrentTestType } from "../resultManager.js";
 
 function ReadyPage(props) {
+  const testType = getCurrentTestType();
   let img = null;
   let titleText = "";
-  switch (props.testType) {
+  switch (testType) {
     case "covid":
       img = covid;
       titleText = "Covid Test";
@@ -31,7 +33,7 @@ function ReadyPage(props) {
   }, []);
   return (
     <div
-      className="bg-gray-900 text-white h-screen flex flex-col justify-center items-center"
+      className=" text-white h-screen flex flex-col justify-center items-center"
       alt="container"
     >
       <div

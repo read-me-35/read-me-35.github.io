@@ -4,10 +4,18 @@ import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "./Camera.css";
 import { setResults } from "../resultManager.js";
+import { getCurrentTestType } from "../resultManager.js";
 
 function Camera(props) {
   let URL;
-  switch (props.testType) {
+  const testType = getCurrentTestType();
+  const messages = {
+    covid:
+      "Position the test vertically, with the well at the bottom. Ensure the test is well lit and positioned near the screen.",
+    pregnancy:
+      "Position the test vertically, with the stick at the bottom. Ensure the test is well lit and positioned near the screen.",
+  };
+  switch (testType) {
     case "covid":
       URL = "https://teachablemachine.withgoogle.com/models/EprntJt-u/"; // Model V2 (prototype 3)
       //URL = "https://teachablemachine.withgoogle.com/models/s9rU1K5RQ/"; // Model V1 (prototype 2)
@@ -157,6 +165,9 @@ function Camera(props) {
           </div>
         ) : (
           <div className="flex gap-2 flex-col">
+            <div className="text-gray-300 text-xs italic p-2 border-2 border-gray-500 rounded-lg w-56 text-center">
+              {messages[testType]}
+            </div>
             <button
               className={`btn text-black border-transparent rounded-md bg-blue-400  px-4 py-2 `}
               alt="open webcam button"
@@ -178,7 +189,7 @@ function Camera(props) {
         <div
           id="results-list"
           alt="results list"
-          className="border-2 border-grey-700 rounded-lg p-6 mt-4"
+          className="border-2 border-gray-700 bg-gray-600 rounded-lg p-6 mt-4"
         ></div>
       ) : (
         <></>
