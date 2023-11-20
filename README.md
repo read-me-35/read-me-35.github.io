@@ -13,6 +13,7 @@ Welcome to our web application designed to assist blind individuals in reading m
 ## Introduction
 
 The app was developed to bridge the accessibility gap for visually impaired individuals when it comes to understanding medical test results. It utilizes advanced technologies to convert test results to synthesized speech and large contrasted print.
+You can see the application [here](https://resultats-de-testes-accessibles.github.io/RTA/)!
 
 ## Installation
 
@@ -64,8 +65,7 @@ The Blind Medical Test Reader WebApp is released under the [MIT License](https:/
 
 ---
 
-Thank you for choosing the Blind Medical Test Reader WebApp. We hope it provides valuable assistance to visually impaired individuals in understanding their medical test results. For any further inquiries or support, please contact our team at support@medicaltestreader.com.
-
+Thank you for choosing the Blind Medical Test Reader WebApp. We hope it provides valuable assistance to visually impaired individuals in understanding their medical test results.
 
 ## Group information
 
