@@ -20,39 +20,39 @@ function Selection(props) {
         alt="container"
       >
         <button
-          className="bg-red-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
+          className="bg-red-500 text-white px-4 py-2 rounded-lg w-40 flex flex-col items-center space-y-2"
           alt="Return button"
           onClick={props.toPrevPage}
         >
-          <span className="text-center text-base sm:text-lg" alt="Return">
+          <span className="text-center text-lg" alt="Return">
             Back
           </span>
         </button>
         <button
-          className="bg-yellow-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
+          className="bg-yellow-500 text-white px-4 py-2 rounded-lg w-40 flex flex-col items-center space-y-2"
           onClick={() => {
             setCurrentTestType("covid"), props.toNextPage();
           }}
         >
-          <span className="text-center text-base sm:text-lg">Covid</span>
+          <span className="text-center text-lg">Covid</span>
           <img src={covid} alt="Select Covid Testing" className="w-6 h-6" />
         </button>
         <button
-          className="bg-pink-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2"
+          className="bg-pink-500 text-white px-4 py-2 rounded-lg w-40 flex flex-col items-center space-y-2"
           onClick={() => {
             setCurrentTestType("pregnancy"), props.toNextPage();
           }}
         >
-          <span className="text-center text-base sm:text-lg">Pregnancy</span>
+          <span className="text-center text-lg">Pregnancy</span>
           <img src={preg} alt="Select Pregnancy Testing" className="w-6 h-6" />
         </button>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-36 sm:w-40 flex flex-col items-center space-y-2 cursor-not-allowed opacity-50"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg w-40 flex flex-col items-center space-y-2 cursor-not-allowed opacity-50"
           /*onClick={() => {
             setCurrentTestType("pH"), props.toNextPage();
           }}*/
         >
-          <span className="text-center text-base sm:text-lg">PH Level</span>
+          <span className="text-center text-lg">PH Level</span>
           <img src={ph} alt="Select PH Level Testing" className="w-6 h-6" />
         </button>
       </div>
