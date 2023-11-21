@@ -92,6 +92,7 @@ function Camera(props) {
     setResults(results);
 
     //for each entry, create a new html element and append to the label container
+    /*
     for (let i = 0; i < results.length; i++) {
       const entry = document.createElement("h2");
       if (i === 0) {
@@ -103,6 +104,7 @@ function Camera(props) {
       entry.innerHTML = `${results[i][0]}: ${results[i][1]}%`;
       document.getElementById("results-list").appendChild(entry);
     }
+    */
   }
 
   useEffect(() => {
