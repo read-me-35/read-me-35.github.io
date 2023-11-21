@@ -28,8 +28,13 @@ function ResultPage(props) {
   let img = null;
   let text = "";
   let activeLink = null;
+
   switch (testType) {
     case "covid":
+      if (results[0][1] < 95) {
+        results[0][0] = "2.Invalid";
+        results[0][1] = "?";
+      }
       activeLink = links[0];
       switch (results[0][0]) {
         case "0.Positive":
@@ -55,6 +60,10 @@ function ResultPage(props) {
       }
       break;
     case "pregnancy":
+      if (results[0][1] < 95) {
+        results[0][0] = "3.Invalid";
+        results[0][1] = "?";
+      }
       activeLink = links[1];
       switch (results[0][0]) {
         case "1.Pregnant":

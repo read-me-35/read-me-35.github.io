@@ -184,7 +184,7 @@ function Camera(props) {
         )}
       </div>
 
-      {imgSrc ? (
+      {/*imgSrc ? (
         <div
           id="results-list"
           alt="results list"
@@ -192,7 +192,7 @@ function Camera(props) {
         ></div>
       ) : (
         <></>
-      )}
+      )*/}
     </div>
   );
 }
