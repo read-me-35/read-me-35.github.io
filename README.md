@@ -28,7 +28,7 @@ To set up this application locally, please follow these steps:
 2. Navigate to the project directory:
 
    ```
-   cd RTA
+   cd read-me-35.github.io
    ```
 
 3. Install the dependencies:
