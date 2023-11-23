@@ -47,7 +47,7 @@ To set up this application locally, please follow these steps:
 
 ## Accessibility
 
-We developed this application with accessibility in mind. It adheres to the Web Content Accessibility Guidelines (WCAG) 2.1 to ensure a user-friendly experience for visually impaired individuals. The application is compatible with screen readers and provides alternative formats such as synthesized speech.
+We developed this application with accessibility in mind. The application is compatible with screen readers and provides alternative formats such as synthesized speech.
 
 ## Contributing
 
