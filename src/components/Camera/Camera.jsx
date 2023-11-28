@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-unused-vars */
+/* eslint-disable no-unused-vars */
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
@@ -50,12 +50,16 @@ function Camera(props) {
   async function init() {
     model = await tmImage.load(modelURL, metadataURL);
     await webcam.setup();
+    document.getElementById("webcam-container").appendChild(webcam.webcam);
+    let wc = document.getElementsByTagName("video")[0];
+    wc.setAttribute("playsinline", true); // written with "setAttribute" bc. iOS buggs otherwise :-)
+    wc.muted = "true";
+    wc.id = "webcamVideo";
     openCamera();
-    document.getElementById("webcam-container").appendChild(webcam.canvas);
   }
 
-  async function openCamera() {
-    await webcam.play();
+  function openCamera() {
+    webcam.play();
     window.requestAnimationFrame(loop);
     //setCamOn(true); // this line causes an error sometimes for some reason
   }
@@ -140,7 +144,11 @@ function Camera(props) {
             height="300"
           />
         ) : (
-          <div id="webcam-container" alt="webcam container"></div>
+          <div
+            id="webcam-container"
+            alt="webcam container"
+            className="overflow-hidden w-[300px] h-[300px] rounded-lg flex align-center"
+          ></div>
         )}
       </div>
       <div className="" alt="buttons container">

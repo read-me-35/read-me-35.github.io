@@ -69,7 +69,7 @@ Thank you for choosing ReadMe!. We hope it provides valuable assistance to visua
 
 ## Group information
 
-Group:FA3.5
+Group: FA3.5
 
 Name: Sacha Arseneault
 Student #: 300152630
