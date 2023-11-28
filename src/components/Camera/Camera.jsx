@@ -49,7 +49,7 @@ function Camera(props) {
   // Load the image model and setup the webcam
   async function init() {
     model = await tmImage.load(modelURL, metadataURL);
-    await webcam.setup();
+    await webcam.setup({ facingMode: "environment" });
     document.getElementById("webcam-container").appendChild(webcam.webcam);
     let wc = document.getElementsByTagName("video")[0];
     wc.setAttribute("playsinline", true); // written with "setAttribute" bc. iOS buggs otherwise :-)
