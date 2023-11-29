@@ -5,8 +5,10 @@ import { useEffect } from "react";
 function Home(props) {
   useEffect(() => {
     //this code will run after the render, for tts
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
-    window.speechSynthesis.speak(utterance);
+    if (props.isTtsEnabled) {
+      let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+      window.speechSynthesis.speak(utterance);
+    }
   }, []);
   return (
     <div
