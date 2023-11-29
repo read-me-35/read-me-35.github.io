@@ -32,11 +32,11 @@ function Selection(props) {
           alt="toggle dark mode button"
           onClick={props.toggleDisplayMode}
         >
-          <span className="text-center" alt="button text">{props.isLightMode ? "Dark" : "Light"}</span>
+          <span className="text-center" alt="button text">{props.isLightMode ? "Light" : "Dark"}</span>
           {props.isLightMode ? (
-            <img src={dark} alt="Icon" className="w-8 h-8" />
-          ) : (
             <img src={light} alt="Icon" className="w-8 h-8" />
+          ) : (
+            <img src={dark} alt="Icon" className="w-8 h-8" />
           )}
         </button>
         <button
