@@ -1,12 +1,16 @@
 import dark from "../../assets/images/moonimage.png";
 import light from "../../assets/images/lightimage.png";
-import { useEffect } from 'react';
+import soundOn from "../../assets/images/soundOn.png";
+import soundOff from "../../assets/images/soundOff.png";
+import { useEffect, useState } from 'react';
 
 function Selection(props) {
-  const { isLightMode, toggleMode } = props;
+  
   useEffect(() => { //this code will run after the render, for tts
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
-    window.speechSynthesis.speak(utterance);
+    if (props.isTtsEnabled) {
+      let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+      window.speechSynthesis.speak(utterance);
+    }
   }, []);
   return (
     <div
@@ -23,17 +27,31 @@ function Selection(props) {
         <div className="my-2" alt="space"></div> {/* Add space between buttons */}
         <button
           className={`${
-            isLightMode ? "bg-gray-700 text-white" : "bg-white text-black"
+            props.isLightMode ? "bg-gray-700 text-white" : "bg-white text-black"
           }  px-4 py-2 rounded-lg w-48 flex flex-col items-center space-y-2`}
           alt="toggle dark mode button"
           onClick={props.toggleDisplayMode}
         >
-          <span className="text-center" alt="button text">{isLightMode ? "Dark" : "Light"}</span>
-          {isLightMode ? (
-            <img src={dark} alt="Icon" className="w-8 h-8" />
-          ) : (
+          <span className="text-center" alt="button text">{props.isLightMode ? "Light" : "Dark"}</span>
+          {props.isLightMode ? (
             <img src={light} alt="Icon" className="w-8 h-8" />
+          ) : (
+            <img src={dark} alt="Icon" className="w-8 h-8" />
           )}
+        </button>
+        <button
+          className={`${
+            props.isLightMode ? "bg-gray-700 text-white" : "bg-white text-black"
+          }  px-4 py-2 rounded-lg w-48 flex flex-col items-center space-y-2`}
+          alt="toggle dark mode button"
+          onClick={props.toggleTtsMode}
+        >
+          <span className="text-center" alt="button text">Text-To-Speech Sound</span>
+          <img 
+            src={props.isTtsEnabled ? soundOn : soundOff}
+            alt="Icon"
+            className="w-8 h-8"
+          />
         </button>
       </div>
     </div>

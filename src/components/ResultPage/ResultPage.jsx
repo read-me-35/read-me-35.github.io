@@ -92,8 +92,10 @@ function ResultPage(props) {
 
   useEffect(() => {
     // Check the first element at index [0][0] of the results array
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
-    window.speechSynthesis.speak(utterance);
+    if (props.isTtsEnabled) {
+      let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+      window.speechSynthesis.speak(utterance);
+    }
   }, [results]);
 
   return (
