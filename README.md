@@ -16,7 +16,7 @@ https://youtu.be/ijmQ5Rg2q8g
 
 ## Introduction
 
-The app was developed to bridge the accessibility gap for visually impaired individuals when it comes to understanding medical test results. It utilizes advanced technologies to convert test results to synthesized speech and large contrasted print.
+The app was developed to bridge the accessibility gap for visually impaired individuals when it comes to understanding medical test results. It utilizes advanced technologies such as Machine Learning to convert test results to synthesized speech and large contrasted print.
 
 ## Installation
 
@@ -64,7 +64,7 @@ We welcome contributions to enhance the functionality and accessibility of this 
 
 ## License
 
-The Blind Medical Test Reader WebApp is released under the [MIT License](https://opensource.org/licenses/MIT). You are free to modify and distribute the application under the terms specified in the license.
+ReadMe! is released under the [MIT License](https://opensource.org/licenses/MIT). You are free to modify and distribute the application under the terms specified in the license.
 
 ---
 
