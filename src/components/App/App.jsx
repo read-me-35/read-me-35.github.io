@@ -6,15 +6,21 @@ import Settings from "../Settings/Settings.jsx";
 import ReadyPage from "../ReadyPage/ReadyPage.jsx";
 import Camera from "../Camera/Camera.jsx";
 import ResultPage from "../ResultPage/ResultPage.jsx";
+import { projectPoints } from "@techstark/opencv-js";
 
 function App() {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLightMode, setLightMode] = useState(false);
+  const [isTtsEnabled, setTts] = useState(false);
   //const [results, setResults] = useState(null); // Initialize results state
 
   const toggleMode = () => {
     setLightMode(!isLightMode);
   };
+  
+  const toggleTts = () => {
+    setTts(!isTtsEnabled);
+  }
 
   const nextPage = () => {
     if (pageIndex !== pages.length - 1)
@@ -44,30 +50,36 @@ function App() {
       toPrevPage={previousPage}
       toNextPage={nextPage}
       toggleDisplayMode={toggleMode}
+      toggleTtsMode={toggleTts}
+      isTtsEnabled={isTtsEnabled}
       isLightMode={isLightMode}
     />,
-    <Home key="home" toPrevPage={previousPage} toNextPage={nextPage} />,
+    <Home key="home" toPrevPage={previousPage} toNextPage={nextPage} isTtsEnable={isTtsEnabled} />,
     <Selection
       key="selection"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      isTtsEnabled={isTtsEnabled}
       isLightMode={isLightMode}
     />,
     <ReadyPage
       key="readyPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      isTtsEnabled={isTtsEnabled}
     />,
     <Camera
       key="camera"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      isTtsEnabled={isTtsEnabled}
       isLightMode={isLightMode}
     />,
     <ResultPage
       key="resultPage"
       toPrevPage={previousPage}
       toNextPage={nextPage}
+      isTtsEnabled={isTtsEnabled}
       isLightMode={isLightMode}
       backToTestPage={backToTestPage}
       backToHomePage={backToHomePage}
@@ -76,8 +88,10 @@ function App() {
 
   useEffect(() => {
     //this code will run after the render
-    let utterance = new SpeechSynthesisUtterance(document.body.innerText);
-    window.speechSynthesis.speak(utterance);
+    if (isTtsEnabled) {
+      let utterance = new SpeechSynthesisUtterance(document.body.innerText);
+      window.speechSynthesis.speak(utterance);
+    }
   }, []);
 
   return (
