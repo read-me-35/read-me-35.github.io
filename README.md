@@ -3,6 +3,9 @@
 Welcome to our web application designed to assist blind individuals in reading medical tests. This application aims to provide a user-friendly interface that enables blind users to interpret and understand various medical test results.
 You can see the application [*here*](https://read-me.app)!
 
+## Demo Video
+https://youtu.be/ijmQ5Rg2q8g
+
 ## Table of Contents
 
 - [Introduction](#introduction)
